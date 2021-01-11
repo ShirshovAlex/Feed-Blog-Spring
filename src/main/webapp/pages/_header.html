@@ -1,0 +1,94 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Feed Blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul th:if="${session.user == null}" class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Hello Guest</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user/registration">Registration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/authorization">Authorization</a>
+            </li>
+        </ul>
+
+        <ul th:if="${session.user != null}" class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" th:text="${'Hello ' + session.user.getName()}"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/post/create">Create post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/account">Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/logout">Logout</a>
+            </li>
+        </ul>
+
+        <ul th:if="${session.user != null && session.user.getLogin().equals('admin')}" class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Post
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/post/updateDescription">Update description</a>
+                    <a class="dropdown-item" href="/post/deleteById">Delete by id</a>
+                    <a class="dropdown-item" href="/post/deleteByTitle">Delete by tittle</a>
+                    <a class="dropdown-item" href="/post/getAllPosts">Get All</a>
+                    <a class="dropdown-item" href="/post/getById">Get by id</a>
+                    <a class="dropdown-item" href="/post/getByTitle">Get by tittle</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item" href="/user/deleteById">Delete user by Id</a>
+                    <a class="dropdown-item" href="/user/deleteByLogin">Delete user by Login</a>
+                    <a class="dropdown-item" href="/user/getAll">Get all</a>
+                    <a class="dropdown-item" href="/user/getAllByName">Get all by Name</a>
+
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    <a class="dropdown-item" href="/category/save">Save</a>
+                    <a class="dropdown-item" href="/category/deleteById">Delete by id</a>
+                    <a class="dropdown-item" href="/category/update">Update name</a>
+                    <a class="dropdown-item" href="/category/getAllCategory">Get all</a>
+                    <a class="dropdown-item" href="/category/getByNameCategory">Get by name</a>
+                    <a class="dropdown-item" href="/category/getByIdCategory">Get by id</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Moderate
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    <a class="dropdown-item" href="/post/moderate">check</a>
+                </div>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+</html>
